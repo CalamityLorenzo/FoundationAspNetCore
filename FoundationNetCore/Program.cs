@@ -11,8 +11,9 @@ namespace FoundationNetCore
     {
         public static void Main(string[] args)
         {
+            // damnsd
             var host = new WebHostBuilder()
-                .UseKestrel()
+                .UseKestrel() 
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
