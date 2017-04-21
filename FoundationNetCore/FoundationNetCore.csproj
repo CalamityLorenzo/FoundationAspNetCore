@@ -7,6 +7,16 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\lib\foundation.js" />
+    <Content Include="wwwroot\lib\foundation.min.js" />
+    <Content Include="wwwroot\lib\jquery.slim.js" />
+    <Content Include="wwwroot\lib\jquery.slim.min.js" />
+    <Content Include="wwwroot\lib\jquery.slim.min.map" />
+    <Content Include="wwwroot\lib\lodash.js" />
+    <Content Include="wwwroot\lib\lodash.min.js" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
@@ -17,9 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>
