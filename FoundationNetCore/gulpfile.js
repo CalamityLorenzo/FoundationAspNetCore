@@ -43,6 +43,7 @@ gulp.task("sass:foundation", function () {
     gulp.src("./Scss/app.scss").pipe(sass({
         includePaths: ["./node_modules/foundation-sites/scss"]
     })
-        .on('error', sass.logError))
-        .pipe(rename("foundation.css")).pipe(gulp.dest(paths.webroot + "css"));
+    .on('error', sass.logError))
+    .pipe(rename("foundation.css"))
+    .pipe(gulp.dest(paths.webroot + "css"));
 });
