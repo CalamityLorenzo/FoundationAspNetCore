@@ -86,4 +86,7 @@
     <None Include="PostData\dbo.Publishers.data.sql" />
     <None Include="PostData\dbo.BookAuthors.data.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="LoadData.PostDeployment.sql" />
+  </ItemGroup>
 </Project>

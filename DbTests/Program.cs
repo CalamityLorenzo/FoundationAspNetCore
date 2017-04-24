@@ -19,7 +19,7 @@ namespace DbTests
         static async Task  DoThings()
         {
             var optionsBuilder = new DbContextOptionsBuilder<BooksCatalogueContext>();
-            optionsBuilder.UseSqlServer();
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=BooksCatalogue;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             var cFactory = new LoggerFactory();
             cFactory.AddProvider(new ConsoleLoggerProvider());
 
@@ -31,7 +31,7 @@ namespace DbTests
                
                 var bookAuthor = bcc.BookAuthors.Include(p=>p.Author).Where(o => o.BookId > 27).ToList();
 
-                var boks = bcc.Books.Include(o=>o.Authors).ToList();
+                var boks = bcc.Books.Include(o=>o.Authors).ThenInclude(p=>p.Author).ToList();
                // var authors = bcc.Authors.Include(o => o.Books).ToList();
                 var lastBook = boks.Last();
                 var itme = lastBook.Authors.ToList();
@@ -46,4 +46,4 @@ namespace DbTests
             
         }
     }
-}
+}   

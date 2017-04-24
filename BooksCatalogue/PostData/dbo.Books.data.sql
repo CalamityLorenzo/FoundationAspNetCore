@@ -13,4 +13,5 @@ INSERT INTO [dbo].[Books] ([Id], [Name], [Genre], [OriginalPublisher], [YearFirs
 INSERT INTO [dbo].[Books] ([Id], [Name], [Genre], [OriginalPublisher], [YearFirst]) VALUES (21, N'The Adventures of Tom Bombadil', 2048, 10, 1955)
 INSERT INTO [dbo].[Books] ([Id], [Name], [Genre], [OriginalPublisher], [YearFirst]) VALUES (22, N'Bleak House', 3, 11, 1853)
 INSERT INTO [dbo].[Books] ([Id], [Name], [Genre], [OriginalPublisher], [YearFirst]) VALUES (26, N'Strange Case of Dr Jekyll and Mr Hyde', 8192, 12, 1886)
+INSERT INTO [dbo].[Books] ([Id], [Name], [Genre], [OriginalPublisher], [YearFirst]) VALUES (28, N'Good Omens', 7, 12, 1990)
 SET IDENTITY_INSERT [dbo].[Books] OFF
