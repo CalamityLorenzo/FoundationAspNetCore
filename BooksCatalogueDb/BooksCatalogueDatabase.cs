@@ -15,7 +15,7 @@ namespace BooksCatalogueDb
         public DbSet<BookAuthor> BookAuthors { get; set; }
 
 
-        public BooksCatalogueContext(DbContextOptions<BooksCatalogueContext> options) : base(options)
+        internal BooksCatalogueContext(DbContextOptions<BooksCatalogueContext> options) : base(options)
         {
 
         }
@@ -37,11 +37,6 @@ namespace BooksCatalogueDb
             modelBuilder.Entity<BookAuthor>()
                 .HasKey(o => new { o.BookId, o.AuthorId });
                
-            modelBuilder.Entity<Book>()
-                .HasMany(o => o.Authors).WithOne(o => o.Book).HasForeignKey(o => o.BookId);
-
-            modelBuilder.Entity<Author>()
-                .HasMany(o => o.Books).WithOne(p => p.Author).HasForeignKey(o => o.AuthorId);
 
 
             modelBuilder.Entity<BookAuthor>()
@@ -54,6 +49,12 @@ namespace BooksCatalogueDb
             modelBuilder.Entity<Book>()
             .Property(o => o.OriginalPublisherId).HasColumnName("Id");
 
+            modelBuilder.Entity<Book>()
+                .HasMany(o => o.Authors).WithOne(o => o.Book).HasForeignKey(o => o.BookId);
+
+            modelBuilder.Entity<Author>()
+                .HasMany(o => o.Books).WithOne(p => p.Author).HasForeignKey(o => o.AuthorId);
+            modelBuilder.Entity<Publisher>().ToTable("Publishers");
 
         }
     }

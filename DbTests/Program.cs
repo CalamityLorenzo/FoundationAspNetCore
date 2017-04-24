@@ -31,8 +31,12 @@ namespace DbTests
                
                 var bookAuthor = bcc.BookAuthors.Include(p=>p.Author).Where(o => o.BookId > 27).ToList();
 
-                var boks = bcc.Books.Include(o=>o.Authors).ThenInclude(p=>p.Author).ToList();
-               // var authors = bcc.Authors.Include(o => o.Books).ToList();
+                var authors = bcc.Authors;
+
+                var authorBooks = authors.FirstOrDefault(o => o.FirstName == "Stephen").Books;
+
+                var boks = bcc.Books.Include(o=>o.OriginalPublisher).Include(o => o.Authors).ThenInclude(p => p.Author).ToList();
+                // var authors = bcc.Authors.Include(o => o.Books).ToList();
                 var lastBook = boks.Last();
                 var itme = lastBook.Authors.ToList();
 
