@@ -4,7 +4,8 @@ using System.Text;
 
 namespace BooksCatalogueDb.BookInterface
 {
-    interface IBook
+    public interface IBook
     {
+        int Id { get; }
     }
 }

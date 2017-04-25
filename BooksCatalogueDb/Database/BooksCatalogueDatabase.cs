@@ -9,8 +9,8 @@ namespace BooksCatalogueDb
 {
     public class BooksCatalogueContext : DbContext
     {
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Author> Authors { get; set; }
+        public DbSet<BookDb> Books { get; set; }
+        public DbSet<AuthorDb> Authors { get; set; }
         //   public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
 
@@ -43,24 +43,29 @@ namespace BooksCatalogueDb
                 .HasOne(bc => bc.Book).WithMany(o => o.Authors).HasForeignKey(o => o.BookId);
             modelBuilder.Entity<BookAuthor>()
                 .HasOne(bc => bc.Author).WithMany(o => o.Books).HasForeignKey(o => o.AuthorId);
-            //modelBuilder.Entity<BookAuthor>()
-            //    .Property(o => o.BookId).HasColumnName("Id");
 
-            modelBuilder.Entity<Book>()
-            .Property(o => o.OriginalPublisherId).HasColumnName("Id");
+            modelBuilder.Entity<BookDb>()
+                .ToTable("Books");
 
-            modelBuilder.Entity<Book>()
+            modelBuilder.Entity<BookDb>()
+                .Property(o => o.OriginalPublisherId).HasColumnName("Id");
+
+            modelBuilder.Entity<BookDb>()
                 .HasMany(o => o.Authors).WithOne(o => o.Book).HasForeignKey(o => o.BookId);
 
-            modelBuilder.Entity<Author>()
+            modelBuilder.Entity<AuthorDb>()
                 .HasMany(o => o.Books).WithOne(p => p.Author).HasForeignKey(o => o.AuthorId);
+
+            modelBuilder.Entity<AuthorDb>()
+                .ToTable("Authors");
+
             modelBuilder.Entity<Publisher>().ToTable("Publishers");
 
         }
     }
-    public class Book
+    public class BookDb
     {
-        public Book()
+        public BookDb()
         {
             this.Authors = new List<BookAuthor>();
         }
@@ -80,14 +85,14 @@ namespace BooksCatalogueDb
     public class BookAuthor
     {
         public int BookId { get; set; }
-        public Book Book {get;set;}
+        public BookDb Book {get;set;}
         public int AuthorId { get; set; }
-        public Author Author { get; set; }
+        public AuthorDb Author { get; set; }
     }
 
-    public class Author
+    public class AuthorDb
     {
-        public Author() { this.Books = new List<BookAuthor>(); }
+        public AuthorDb() { this.Books = new List<BookAuthor>(); }
 
         public int Id { get; set; }
         public string FirstName { get; set; }

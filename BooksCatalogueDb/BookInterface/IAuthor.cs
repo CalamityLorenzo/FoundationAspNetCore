@@ -4,7 +4,14 @@ using System.Text;
 
 namespace BooksCatalogueDb.BookInterface
 {
-    interface IAuthor
+    public interface IAuthor
     {
+        int Id { get; }
+        string FirstName { get; }
+        string LastName { get; }
+        string ThumbNailUrl { get; }
+        int YearOfBirth { get; }
+        int? YearOfDeath { get; }
+        string Bio { get; }
     }
 }
