@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using BooksCatalogueDb.Books;
+using BooksCatalogueDb.Application;
 
 namespace DbTests
 {
@@ -12,15 +13,13 @@ namespace DbTests
     {
         static void Main(string[] args)
         {
-
-
-
+            
             DoThings().Wait();
         }
 
         static async Task DoThings()
         {
-            DatabaseConfig.SetDbOptions(() =>
+            Func<DbContextOptions> funMeBba = () =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<BooksCatalogueContext>();
                 optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=BooksCatalogue;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
@@ -29,12 +28,13 @@ namespace DbTests
 
                 optionsBuilder.UseLoggerFactory(cFactory);
                 return optionsBuilder.Options;
-            });
+            };
 
-            AuthorsCatalogue ac = new AuthorsCatalogue();
-            ac.AuthorsGroupedByName();
+            BookCatalogue bc = new BookCatalogue();
+            var books = bc.GetBooks();
 
-           
+
+            books.ToList().ForEach(o => Console.WriteLine(o.Genre.ToString()));
 
         }
     }

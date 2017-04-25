@@ -13,7 +13,7 @@ namespace BooksCatalogueDb
         public DbSet<AuthorDb> Authors { get; set; }
         //   public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
-
+        public DbSet<GenreDb> Genres { get; set; }
 
         internal BooksCatalogueContext(DbContextOptions<BooksCatalogueContext> options) : base(options)
         {
@@ -61,6 +61,8 @@ namespace BooksCatalogueDb
 
             modelBuilder.Entity<Publisher>().ToTable("Publishers");
 
+            modelBuilder.Entity<GenreDb>()
+                .ToTable("Genres");
         }
     }
     public class BookDb
@@ -115,7 +117,7 @@ namespace BooksCatalogueDb
     }
 
 
-    public class Genre
+    public class GenreDb
     {
         public int Id { get; set; }
         public string GenreName { get; set; }
