@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BooksCatalogueDb.BookInterface
 {
-    public interface IAuthor
+    public interface IAuthor: IBaseEntity
     {
         int Id { get; }
         string FirstName { get; }

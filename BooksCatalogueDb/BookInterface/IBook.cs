@@ -4,13 +4,13 @@ using System.Text;
 
 namespace BooksCatalogueDb.BookInterface
 {
-    public interface IBook
+    public interface IBook : IBaseEntity
     {
-        int Id { get; }
         string Name { get; }
         BookGenre Genre { get; }
         int OriginalPublisherId { get; }
         string OriginalPublisher { get; }
+        string Synopsis { get; }
         int YearFirst { get; }
     }
 }

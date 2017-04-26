@@ -5,70 +5,100 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BooksCatalogueDb.Books
 {
 
     // Get's  the info about AUthors
-    public class AuthorsCatalogue
+    public class AuthorsCatalogueShoes
     {
         BooksCatalogueContext ctx;
-        public AuthorsCatalogue()
+        public AuthorsCatalogueShoes()
         {
             this.ctx = DatabaseConfig.GetContext();
             if (ctx == null)
-                throw new ArgumentNullException(" Somethings gone wrong");
+                throw new ArgumentNullException("Somethings gone wrong");
         }
 
-        public IEnumerable<IGrouping<char, IAuthor>> AuthorsGroupedByName()
+        #region Basics
+        public void Add(IAuthor newAuthor)
         {
-            var GrpdAutors = ctx.Authors.Select(i => Author.MapFromDb(i)).GroupBy(o => o.FirstName.First());
-            return GrpdAutors.ToList();
+            CreateAuthor(newAuthor);
+            ctx.SaveChanges();
+        }
+        public async Task AddAsync(IAuthor newAuthor)
+        {
+            CreateAuthor(newAuthor);
+            await ctx.SaveChangesAsync();
         }
 
+        public IAuthor Get(int id)
+        {
+            return Author.MapFromDb(ctx.Authors.Single(o => o.Id == id));
+        }
+        public async Task Update(IAuthor author)
+        {
+            ctx.Authors.Update(Author.MapToDb(author));
+            await ctx.SaveChangesAsync();
+        }
+
+
+        #endregion
         private void CreateAuthor(IAuthor newAuthor)
         {
             var newAuthorDb = Author.MapToDb(newAuthor);
             ctx.Authors.Add(newAuthorDb);
         }
 
-        public void AddAuthor(IAuthor newAuthor)
+
+
+    }
+
+    public class AuthorsCatalogue : BaseRepository<AuthorDb, IAuthor>
+    {
+        internal AuthorsCatalogue(DbContext ctx) : base(ctx)
         {
-            CreateAuthor(newAuthor);
-            ctx.SaveChanges();
         }
 
-        public async Task AddAuthorAsync(IAuthor newAuthor)
+        internal override Func<AuthorDb, IAuthor> MapFromDb => Author.MapFromDb;
+        internal override Func<IAuthor, AuthorDb> MapToDb => Author.MapToDb;
+
+        public AuthorsCatalogue():base() { }
+
+        public IEnumerable<IGrouping<char, IAuthor>> AuthorsGroupedByName()
         {
-            CreateAuthor(newAuthor);
-            await ctx.SaveChangesAsync();
+            // Simply grouped by the first character of tehir last name
+            var GrpdAutors = MappAllFromDb(DbEnties).GroupBy(o => o.LastName.First());
+            return GrpdAutors.ToList();
         }
+
 
         public IEnumerable<IAuthor> FindAuthorByBook(IBook Book)
         {
-            var BookAuthorList = ctx.BookAuthors.Where(ba => ba.Book == Book);
-            return BookAuthorList.Select(o => Author.MapFromDb(o.Author));
+            // An Anomoly
+            var BookAndAuthors = ctx.Set<BookAuthor>();
+
+
+            var BookAuthorList = BookAndAuthors.Include(o=>o.Author).Where(ba => ba.Book == Book);
+            return BookAuthorList.Select(o => this.MapFromDb(o.Author));
         }
 
-        public IEnumerable<IAuthor> GetAuthor(string Name)
+        public IEnumerable<IAuthor> Get(string Name)
         {
+            // ALternative Get By NAme
             var name = Name.Split(new[] { ' ' });
             IEnumerable<AuthorDb> FoundAuthor = new List<AuthorDb>();
-            if (name.Length == 2)
+            if (name.Length >= 2)
             {
-                FoundAuthor = ctx.Authors.Where(a => a.FirstName.Equals(name[0], StringComparison.CurrentCultureIgnoreCase) && a.LastName.Equals(StringComparison.CurrentCultureIgnoreCase));
+                FoundAuthor = DbEnties.Where(a => a.FirstName.Equals(name[0], StringComparison.CurrentCultureIgnoreCase) && a.LastName.Equals(StringComparison.CurrentCultureIgnoreCase));
             }
             else
             {
-                FoundAuthor = ctx.Authors.Where(a => a.FirstName.Equals(name[0], StringComparison.CurrentCultureIgnoreCase));
+                FoundAuthor = DbEnties.Where(a => a.FirstName.Equals(name[0], StringComparison.CurrentCultureIgnoreCase));
             }
             return FoundAuthor.Select(o => Author.MapFromDb(o));
 
         }
-        public IAuthor GetAuthor(int id)
-        {
-            return null;
-        }
-
     }
 }

@@ -4,21 +4,26 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace BooksCatalogueDb.Application
 {
-    public class BookCatalogue
+    public class BookCatalogue : BaseRepository<BookDb, IBook>
     {
-        BooksCatalogueContext ctx;
-
-        public BookCatalogue()
+        public BookCatalogue(DbContext ctx) : base(ctx)
         {
-            this.ctx = DatabaseConfig.GetContext();
+
         }
 
-        public IEnumerable<IBook> GetBooks()
+        public BookCatalogue() : base() { }
+
+        internal override Func<BookDb, IBook> MapFromDb => Book.MapFromDb;
+        internal override Func<IBook, BookDb> MapToDb => Book.MapToDb;
+
+        public IEnumerable<IBook> GetAllBooksInfo()
         {
-            return ctx.Books.Include(o=>o.OriginalPublisher).Select(o => Book.MapFromDb(o)).ToList();
+            return MappAllFromDb(DbEnties.AsNoTracking());
         }
+
     }
 }

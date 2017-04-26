@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BooksCatalogueDb.BookInterface
+namespace BooksCatalogueDb.Extensions
 {
-    interface IPublisher : IBaseEntity
+    public static class DbExtensions
     {
-
+        
     }
 }
