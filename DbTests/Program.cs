@@ -34,9 +34,9 @@ namespace DbTests
             //    Bio = "Widdle, Fiddle"
             //});
 
-            names.SelectMany(d => d).ToList().ForEach(Console.WriteLine);
-            Ac.Add(new ClientAuthor { FirstName = "Claude", LastName = "PoundHammer", YearOfBirth = 1987, Bio="Watrnifn", ThumbNailUrl="" });
-            // bc.Add(new ClientBook { Genre = (BookGenre)1025, Name = "JEnny the Book", Synopsis = "", YearFirst = 1835 });
+            //names.SelectMany(d => d).ToList().ForEach(Console.WriteLine);
+            //Ac.Add(new ClientAuthor { FirstName = "Claude", LastName = "PoundHammer", YearOfBirth = 1987, Bio="Watrnifn", ThumbNailUrl="" });
+             bc.Add(new ClientBook { Genre = (BookGenre)1025, Name = "JEnny the Book", OriginalPublisherId=1,  Synopsis = "", YearFirst = 1835 });
         }
 
         class ClientBook : IBook

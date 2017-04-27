@@ -53,10 +53,12 @@ namespace BooksCatalogueDb
 
             modelBuilder.Entity<BookDb>()
                 .ToTable("Books");
+            modelBuilder.Entity<BookDb>()
+                .HasOne(o => o.OriginalPublisher).WithMany(o => o.Books).HasForeignKey(o => o.OriginalPublisherId);
 
             modelBuilder.Entity<BookDb>()
-                .Property(o => o.OriginalPublisherId).HasColumnName("Id");
-
+                .Property(o => o.OriginalPublisherId).HasColumnName("OriginalPublisher");
+           
             modelBuilder.Entity<BookDb>()
                 .HasMany(o => o.Authors).WithOne(o => o.Book).HasForeignKey(o => o.BookId);
 
@@ -142,6 +144,7 @@ namespace BooksCatalogueDb
         public string Name { get; set; }
         public int YearStarted { get; set; }
         public string Bio { get; set; }
+        public virtual ICollection<BookDb> Books { get; set; }
     }
 
     public class GenreDb : BaseEntity
