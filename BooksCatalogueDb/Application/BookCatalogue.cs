@@ -20,7 +20,7 @@ namespace BooksCatalogueDb.Application
         internal override Func<BookDb, IBook> MapFromDb => Book.MapFromDb;
         internal override Func<IBook, BookDb> MapToDb => Book.MapToDb;
 
-        public IEnumerable<IBook> GetAllBooksInfo()
+        public IEnumerable<IBook> GetAllBookInfo()
         {
             return MappAllFromDb(DbEnties.AsNoTracking());
         }
@@ -32,6 +32,11 @@ namespace BooksCatalogueDb.Application
                     BookAuthors.Include(o => o.Author)
                     .Where(o => o.Author == author)
                     .Select(o => o.Book));
+        }
+
+        public IEnumerable<IBook> GetAllBooksForPublisher(IPublisher publisher)
+        {
+
         }
 
     }
