@@ -33,6 +33,8 @@ namespace BooksCatalogueDb.Application
         public int YearFirst { get; }
         public string Synopsis { get; }
 
+        public override string ToString() => $"{Id} : {Name}";
+
         internal static IBook MapFromDb(BookDb book) => new Book(book.Id, 
                                                                  book.Name, 
                                                                  (BookGenre)book.Genre,

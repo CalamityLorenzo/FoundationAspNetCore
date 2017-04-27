@@ -25,12 +25,6 @@ namespace BooksCatalogueDb
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-
-
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // BaseEntity (Base Class) is good for inheritence, but a pain for primary key definitions
@@ -85,7 +79,7 @@ namespace BooksCatalogueDb
         internal int Id { get; set; }
     }
 
-    public class BookDb :BaseEntity
+    public class BookDb : BaseEntity
     {
         // These properties can be 'null' so ensure a value so we don't have to be endless checking
         private string _Synopsis = "";
@@ -103,7 +97,8 @@ namespace BooksCatalogueDb
             get => _Synopsis;
             set
             {
-                if (!string.IsNullOrEmpty(value)){
+                if (!string.IsNullOrEmpty(value))
+                {
                     _Synopsis = value;
                 }
                 else
@@ -127,7 +122,7 @@ namespace BooksCatalogueDb
         public AuthorDb Author { get; set; }
     }
 
-    public class AuthorDb: BaseEntity
+    public class AuthorDb : BaseEntity
     {
         public AuthorDb() { this.Books = new List<BookAuthor>(); }
 

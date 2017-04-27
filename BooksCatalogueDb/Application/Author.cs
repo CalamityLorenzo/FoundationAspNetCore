@@ -32,6 +32,8 @@ namespace BooksCatalogueDb.Application
         public int? YearOfDeath { get; }
         public string Bio { get; }
 
+        public override string ToString() => $"{Id} : {FirstName} {LastName} : {YearOfBirth}";
+        
         internal static IAuthor MapFromDb(AuthorDb author) => new Author(
                                     author.Id,
                                     author.FirstName,
@@ -40,15 +42,16 @@ namespace BooksCatalogueDb.Application
                                     author.YearOfBirth,
                                     author.YearOfDeath, author.Bio);
 
-        internal static AuthorDb MapToDb(IAuthor author) => new AuthorDb  {
-                                                                                Id = author.Id,
-                                                                                Bio = author.Bio,
-                                                                                FirstName = author.FirstName,
-                                                                                LastName = author.LastName,
-                                                                                ThumbNailUrl = author.ThumbNailUrl,
-                                                                                YearOfBirth = author.YearOfBirth,
-                                                                                YearOfDeath = author.YearOfDeath
-                                                                            };
+        internal static AuthorDb MapToDb(IAuthor author) => new AuthorDb
+        {
+            Id = author.Id,
+            Bio = author.Bio,
+            FirstName = author.FirstName,
+            LastName = author.LastName,
+            ThumbNailUrl = author.ThumbNailUrl,
+            YearOfBirth = author.YearOfBirth,
+            YearOfDeath = author.YearOfDeath
+        };
 
 
     }

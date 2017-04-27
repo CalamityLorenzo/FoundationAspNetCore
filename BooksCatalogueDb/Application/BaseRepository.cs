@@ -42,7 +42,8 @@ namespace BooksCatalogueDb.Application
 
         public async Task AddAsync(IApp NewEntity)
         {
-            DbEnties.Add(MapToDb(NewEntity));
+            var item = MapToDb(NewEntity);
+            DbEnties.Add(item);
             await ctx.SaveChangesAsync();
         }
 

@@ -78,8 +78,6 @@ namespace BooksCatalogueDb.Books
         {
             // An Anomoly
             var BookAndAuthors = ctx.Set<BookAuthor>();
-
-
             var BookAuthorList = BookAndAuthors.Include(o=>o.Author).Where(ba => ba.Book == Book);
             return BookAuthorList.Select(o => this.MapFromDb(o.Author));
         }

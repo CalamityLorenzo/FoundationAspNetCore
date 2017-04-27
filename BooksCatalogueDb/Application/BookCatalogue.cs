@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace BooksCatalogueDb.Application
 {
-    public class BookCatalogue : BaseRepository<BookDb, IBook>
+    public class BooksCatalogue : BaseRepository<BookDb, IBook>
     {
-        public BookCatalogue(DbContext ctx) : base(ctx)
+        internal BooksCatalogue(DbContext ctx) : base(ctx)
         {
 
         }
 
-        public BookCatalogue() : base() { }
+        public BooksCatalogue() : base() { }
 
         internal override Func<BookDb, IBook> MapFromDb => Book.MapFromDb;
         internal override Func<IBook, BookDb> MapToDb => Book.MapToDb;
@@ -23,6 +23,15 @@ namespace BooksCatalogueDb.Application
         public IEnumerable<IBook> GetAllBooksInfo()
         {
             return MappAllFromDb(DbEnties.AsNoTracking());
+        }
+
+        public IEnumerable<IBook> GetAllBooksForAuthor(IAuthor author)
+        {
+            var BookAuthors = ctx.Set<BookAuthor>();
+            return this.MappAllFromDb(
+                    BookAuthors.Include(o => o.Author)
+                    .Where(o => o.Author == author)
+                    .Select(o => o.Book));
         }
 
     }
