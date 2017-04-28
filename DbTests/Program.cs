@@ -20,7 +20,7 @@ namespace DbTests
         static async Task DoThings()
         {
             BooksCatalogue bc = new BooksCatalogue();
-            var books = bc.GetAllBookInfo();
+            var books = bc.GetAllBooksInfo();
 
             AuthorsCatalogue Ac = new AuthorsCatalogue();
             var names = Ac.AuthorsGroupedByName();

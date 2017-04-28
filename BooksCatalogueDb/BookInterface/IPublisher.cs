@@ -4,8 +4,10 @@ using System.Text;
 
 namespace BooksCatalogueDb.BookInterface
 {
-    interface IPublisher : IBaseEntity
+    public interface IPublisher : IBaseEntity
     {
-
+         string Name { get;  }
+         int YearStarted { get;  }
+         string Bio { get;  }
     }
 }

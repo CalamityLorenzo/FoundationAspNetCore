@@ -22,7 +22,7 @@ namespace BooksCatalogueDb.Application
 
         public IEnumerable<IBook> GetAllBookInfo()
         {
-            return MappAllFromDb(DbEnties.AsNoTracking());
+            return MappAllFromDb(DbEnties.AsNoTracking()).ToList();
         }
 
         public IEnumerable<IBook> GetAllBooksForAuthor(IAuthor author)
@@ -31,12 +31,12 @@ namespace BooksCatalogueDb.Application
             return this.MappAllFromDb(
                     BookAuthors.Include(o => o.Author)
                     .Where(o => o.Author == author)
-                    .Select(o => o.Book));
+                    .Select(o => o.Book)).ToList();
         }
 
         public IEnumerable<IBook> GetAllBooksForPublisher(IPublisher publisher)
         {
-
+            return this.MappAllFromDb(DbEnties.Where(o => o.OriginalPublisherId == publisher.Id)).ToList();
         }
 
     }
