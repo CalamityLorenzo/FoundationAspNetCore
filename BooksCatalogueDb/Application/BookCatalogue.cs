@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using BooksCatalogueDb.Database;
 
 namespace BooksCatalogueDb.Application
 {
@@ -20,7 +21,7 @@ namespace BooksCatalogueDb.Application
         internal override Func<BookDb, IBook> MapFromDb => Book.MapFromDb;
         internal override Func<IBook, BookDb> MapToDb => Book.MapToDb;
 
-        public IEnumerable<IBook> GetAllBookInfo()
+        public IEnumerable<IBook> GetAllBooksInfo()
         {
             return MappAllFromDb(DbEnties.AsNoTracking()).ToList();
         }

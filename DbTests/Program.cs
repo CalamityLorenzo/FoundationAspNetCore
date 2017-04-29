@@ -1,10 +1,8 @@
 ﻿using System;
 using BooksCatalogueDb;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-using BooksCatalogueDb.Books;
 using BooksCatalogueDb.Application;
 using BooksCatalogueDb.BookInterface;
 
@@ -23,7 +21,12 @@ namespace DbTests
             var books = bc.GetAllBooksInfo();
 
             AuthorsCatalogue Ac = new AuthorsCatalogue();
-            var names = Ac.AuthorsGroupedByName();
+            var names = Ac.AuthorsGroupedByLastName();
+            
+            using(var bookBomb= new BooksDatabaseApp())
+            {
+
+            }
 
             //Ac.Add(new ClientAuthor
             //{
@@ -36,7 +39,7 @@ namespace DbTests
 
             //names.SelectMany(d => d).ToList().ForEach(Console.WriteLine);
             //Ac.Add(new ClientAuthor { FirstName = "Claude", LastName = "PoundHammer", YearOfBirth = 1987, Bio="Watrnifn", ThumbNailUrl="" });
-             bc.Add(new ClientBook { Genre = (BookGenre)1025, Name = "JEnny the Book", OriginalPublisherId=1,  Synopsis = "", YearFirst = 1835 });
+             //bc.Add(new ClientBook { Genre = (BookGenre)1025, Name = "JEnny the Book", OriginalPublisherId=1,  Synopsis = "", YearFirst = 1835 });
         }
 
         class ClientBook : IBook

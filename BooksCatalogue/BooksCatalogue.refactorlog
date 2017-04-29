@@ -35,4 +35,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ThumbnailUrl" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="cc8dc79f-d347-427b-9e11-86982b0d7d7f" ChangeDateTime="04/29/2017 12:51:42">
+    <Property Name="ElementName" Value="[dbo].[Editions].[FileType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Editions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AlternativeName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ef3ba396-1719-404d-a795-8a51f1ab1ca2" ChangeDateTime="04/29/2017 12:52:10">
+    <Property Name="ElementName" Value="[dbo].[Editions].[Year]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Editions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateReleased" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7d18ab29-751d-4030-a10f-4e0a3e12921a" ChangeDateTime="04/29/2017 12:52:25">
+    <Property Name="ElementName" Value="[dbo].[Editions].[CoverImgUrl]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Editions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CoverThumbUrl" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bbffcb37-9865-4eed-a394-05c9d5d0d28b" ChangeDateTime="04/29/2017 12:52:59">
+    <Property Name="ElementName" Value="[dbo].[Editions].[Blurb]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Editions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DescriptionTest" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8197a24f-f44f-4e69-9170-8439e441ecee" ChangeDateTime="04/29/2017 12:54:07">
+    <Property Name="ElementName" Value="[dbo].[EditionFiles].[FileNameExt]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EditionFiles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FileType" />
+  </Operation>
 </Operations>

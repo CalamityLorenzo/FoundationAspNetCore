@@ -6,55 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using BooksCatalogueDb.Database;
 
-namespace BooksCatalogueDb.Books
+namespace BooksCatalogueDb.Application
 {
 
     // Get's  the info about AUthors
-    public class AuthorsCatalogueShoes
-    {
-        BooksCatalogueContext ctx;
-        public AuthorsCatalogueShoes()
-        {
-            this.ctx = DatabaseConfig.GetContext();
-            if (ctx == null)
-                throw new ArgumentNullException("Somethings gone wrong");
-        }
-
-        #region Basics
-        public void Add(IAuthor newAuthor)
-        {
-            CreateAuthor(newAuthor);
-            ctx.SaveChanges();
-        }
-        public async Task AddAsync(IAuthor newAuthor)
-        {
-            CreateAuthor(newAuthor);
-            await ctx.SaveChangesAsync();
-        }
-
-        public IAuthor Get(int id)
-        {
-            return Author.MapFromDb(ctx.Authors.Single(o => o.Id == id));
-        }
-        public async Task Update(IAuthor author)
-        {
-            ctx.Authors.Update(Author.MapToDb(author));
-            await ctx.SaveChangesAsync();
-        }
-
-
-        #endregion
-        private void CreateAuthor(IAuthor newAuthor)
-        {
-            var newAuthorDb = Author.MapToDb(newAuthor);
-            ctx.Authors.Add(newAuthorDb);
-        }
-
-
-
-    }
-
+  
     public class AuthorsCatalogue : BaseRepository<AuthorDb, IAuthor>
     {
         internal AuthorsCatalogue(DbContext ctx) : base(ctx)
@@ -66,7 +24,7 @@ namespace BooksCatalogueDb.Books
 
         public AuthorsCatalogue():base() { }
 
-        public IEnumerable<IGrouping<char, IAuthor>> AuthorsGroupedByName()
+        public IEnumerable<IGrouping<char, IAuthor>> AuthorsGroupedByLastName()
         {
             // Simply grouped by the first character of tehir last name
             var GrpdAutors = MappAllFromDb(DbEnties).GroupBy(o => o.LastName.First());
@@ -80,6 +38,17 @@ namespace BooksCatalogueDb.Books
             var BookAndAuthors = ctx.Set<BookAuthor>();
             var BookAuthorList = BookAndAuthors.Include(o=>o.Author).Where(ba => ba.Book == Book);
             return BookAuthorList.Select(o => this.MapFromDb(o.Author));
+        }
+
+        public async Task AddToBook(IAuthor author, IBook book)
+        {
+            // see if they already exist
+            var bAuthors = this.ctx.Set<BookAuthor>();
+            if (bAuthors.FirstOrDefault(ba => ba.AuthorId == author.Id && ba.BookId == book.Id) == null)
+            {
+                bAuthors.Add(new BookAuthor { AuthorId = author.Id, BookId = book.Id });
+                await ctx.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<IAuthor> Get(string Name)

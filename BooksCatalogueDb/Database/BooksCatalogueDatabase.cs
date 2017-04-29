@@ -5,16 +5,16 @@ using System.Text;
 using JetBrains.Annotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BooksCatalogueDb
+namespace BooksCatalogueDb.Database
 {
-    public class BooksCatalogueContext : DbContext
+    internal class BooksCatalogueContext : DbContext
     {
         public DbSet<BookDb> Books { get; set; }
         public DbSet<AuthorDb> Authors { get; set; }
-        //   public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<GenreDb> Genres { get; set; }
         public DbSet<PublisherDb> Publishers { get; set; }
+
         internal BooksCatalogueContext(DbContextOptions<BooksCatalogueContext> options) : base(options)
         {
 
@@ -49,8 +49,6 @@ namespace BooksCatalogueDb
             modelBuilder.Entity<BookAuthor>()
                 .HasOne(bc => bc.Author).WithMany(o => o.Books).HasForeignKey(o => o.AuthorId);
 
-
-
             modelBuilder.Entity<BookDb>()
                 .ToTable("Books");
             modelBuilder.Entity<BookDb>()
@@ -61,7 +59,6 @@ namespace BooksCatalogueDb
            
             modelBuilder.Entity<BookDb>()
                 .HasMany(o => o.Authors).WithOne(o => o.Book).HasForeignKey(o => o.BookId);
-
 
             modelBuilder.Entity<AuthorDb>()
                 .ToTable("Authors");
