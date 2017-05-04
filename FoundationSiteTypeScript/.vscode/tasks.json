@@ -1,0 +1,58 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "tasks": [
+        {
+            "command": "npm",
+            "isShellCommand": true,
+            "showOutput": "always",
+            "suppressTaskName": true,
+            "echoCommand": true,
+            "taskName": "install",
+            "args": ["install"]
+        },
+        {
+            "command": "npm",
+            "isShellCommand": true,
+            "showOutput": "always",
+            "suppressTaskName": true,
+            "echoCommand": true,            
+            "taskName": "update",
+            "args": ["update"]
+        },
+        {
+            "command": "npm",
+            "isShellCommand": true,
+            "showOutput": "always",
+            "suppressTaskName": true,
+            "echoCommand": true,                    
+            "taskName": "test",
+            "args": ["run", "test"]
+        },
+        {
+            "command": "npm",
+            "isShellCommand": true,
+            "showOutput": "always",
+            "suppressTaskName": true,
+            "echoCommand": true,            
+            "taskName": "build",
+            "args": ["run", "build"],            
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "copyToSite",
+            "command": "robocopy", 
+            "showOutput": "always",
+            "echoCommand": true,
+            "problemMatcher":"$tsc",
+            "suppressTaskName": false,
+            "args": [
+                "dest", "../wwwroot/js"
+            ]
+        }
+    ]
+    
+    
+    
+}
