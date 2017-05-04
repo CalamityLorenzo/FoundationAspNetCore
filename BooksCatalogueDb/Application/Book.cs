@@ -9,8 +9,6 @@ namespace BooksCatalogueDb.Application
 {
     class Book : IBook
     {
-       
-
         public Book(int Id, string Name, BookGenre Genre, int OriginalPublisherId, string OriginalPublisher, string Synopsis, int YearFirst) : this(Name, Genre, OriginalPublisherId, OriginalPublisher, Synopsis, YearFirst)
         {
             this.Id = Id;

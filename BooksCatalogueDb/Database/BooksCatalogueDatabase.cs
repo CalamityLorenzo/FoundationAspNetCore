@@ -15,6 +15,9 @@ namespace BooksCatalogueDb.Database
         public DbSet<GenreDb> Genres { get; set; }
         public DbSet<PublisherDb> Publishers { get; set; }
 
+        public DbSet<EditionDb> Editions { get; set; }
+        public DbSet<EditionFileDb> EditionFiles { get; set; }
+
         internal BooksCatalogueContext(DbContextOptions<BooksCatalogueContext> options) : base(options)
         {
 
@@ -40,6 +43,10 @@ namespace BooksCatalogueDb.Database
             modelBuilder.Entity<GenreDb>()
                 .HasKey(o => o.Id);
 
+            modelBuilder.Entity<EditionDb>()
+                .HasKey(o => o.Id);
+            modelBuilder.Entity<EditionFileDb>()
+                .HasKey(o => o.Id);
 
             modelBuilder.Entity<BookAuthor>()
                 .HasKey(o => new { o.BookId, o.AuthorId });
@@ -56,7 +63,7 @@ namespace BooksCatalogueDb.Database
 
             modelBuilder.Entity<BookDb>()
                 .Property(o => o.OriginalPublisherId).HasColumnName("OriginalPublisher");
-           
+
             modelBuilder.Entity<BookDb>()
                 .HasMany(o => o.Authors).WithOne(o => o.Book).HasForeignKey(o => o.BookId);
 
@@ -70,6 +77,18 @@ namespace BooksCatalogueDb.Database
 
             modelBuilder.Entity<GenreDb>()
                 .ToTable("Genres");
+            modelBuilder.Entity<EditionDb>()
+                .ToTable("Editions");
+            modelBuilder.Entity<EditionFileDb>()
+                .ToTable("EditionFiles");
+
+
+            modelBuilder.Entity<EditionDb>()
+             .HasOne(o => o.Book).WithMany(o => o.Editions);
+
+            modelBuilder.Entity<EditionFileDb>()
+                .HasOne(o => o.Edition).WithMany(o => o.EditionFiles);
+
         }
     }
 
@@ -111,6 +130,7 @@ namespace BooksCatalogueDb.Database
         public int YearFirst { get; set; }
 
         public List<BookAuthor> Authors { get; set; }
+        public virtual ICollection<EditionDb> Editions { get; set; }
     }
 
     public class BookAuthor
@@ -149,6 +169,25 @@ namespace BooksCatalogueDb.Database
         public string GenreName { get; set; }
     }
 
+    public class EditionDb : BaseEntity
+    {
+        public int BookId { get; set; }
+        public BookDb Book { get; set; }
+        public string AlternativeName { get; set; }
+        public DateTime DateReleased { get; set; }
+        public string CoverThumbUrl { get; set; }
+        public int PublisherId { get; set; }
+        public PublisherDb Publisher { get; set; }
+        public string DescriptionText { get; set; }
+        public ICollection<EditionFileDb> EditionFiles { get; set; }
+    }
 
-
+    public class EditionFileDb : BaseEntity
+    {
+        public int EditionId { get; set; }
+        public EditionDb Edition { get; set; }
+        public string FileUrl { get; set; }
+        public string FileType { get; set; }
+        public string FileFormat { get; set; }
+    }
 }

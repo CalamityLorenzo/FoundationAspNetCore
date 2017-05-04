@@ -6,7 +6,7 @@ namespace BooksCatalogueDb.BookInterface
 {
     public interface IAuthor: IBaseEntity
     {
-        int Id { get; }
+        
         string FirstName { get; }
         string LastName { get; }
         string ThumbNailUrl { get; }

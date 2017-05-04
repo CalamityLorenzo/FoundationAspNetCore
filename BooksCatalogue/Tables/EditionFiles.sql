@@ -1,4 +1,6 @@
-﻿CREATE TABLE [dbo].[EditionFiles]
+﻿
+
+CREATE TABLE [dbo].[EditionFiles]
 (
 	[Id] INT NOT NULL PRIMARY KEY, 
 	[Edition] INt NOT NULL,
