@@ -7,7 +7,6 @@ namespace BooksCatalogueDb.BookInterface
 {
     interface IEdition
     {
-
          string AlternativeName { get; set; }
          DateTime DateReleased { get; set; }
          string CoverThumUrl { get; set; }

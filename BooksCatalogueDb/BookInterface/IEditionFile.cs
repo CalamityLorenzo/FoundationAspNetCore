@@ -4,7 +4,10 @@ using System.Text;
 
 namespace BooksCatalogueDb.BookInterface
 {
-    interface IEditionFile
+    interface IEditionFile 
     {
+         string FileType { get;  }
+         string FileUrl { get;  }
+         string FileFormat { get;  }
     }
 }
