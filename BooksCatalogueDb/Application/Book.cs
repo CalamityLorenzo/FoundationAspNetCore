@@ -9,12 +9,12 @@ namespace BooksCatalogueDb.Application
 {
     class Book : IBook
     {
-        public Book(int Id, string Name, BookGenre Genre, int OriginalPublisherId, string OriginalPublisher, string Synopsis, int YearFirst) : this(Name, Genre, OriginalPublisherId, OriginalPublisher, Synopsis, YearFirst)
+        public Book(int Id, string Name, BookGenre Genre, int OriginalPublisherId, string OriginalPublisher, string Synopsis, int YearFirst, IEnumerable<IEdition> Editions) : this(Name, Genre, OriginalPublisherId, OriginalPublisher, Synopsis, YearFirst, Editions)
         {
             this.Id = Id;
         }
 
-        public Book(string Name, BookGenre Genre, int OriginalPublisherId, string OriginalPublisher, string Synopsis, int YearFirst)
+        public Book(string Name, BookGenre Genre, int OriginalPublisherId, string OriginalPublisher, string Synopsis, int YearFirst, IEnumerable<IEdition> Editions) 
         {
             this.Name = Name;
             this.Genre = Genre;
@@ -22,6 +22,7 @@ namespace BooksCatalogueDb.Application
             this.OriginalPublisher = OriginalPublisher;
             this.YearFirst = YearFirst;
             this.Synopsis = Synopsis;
+            this.Editions = new List<IEdition>(Editions);
         }
 
         public int Id { get; }
@@ -31,6 +32,7 @@ namespace BooksCatalogueDb.Application
         public string OriginalPublisher { get; }
         public int YearFirst { get; }
         public string Synopsis { get; }
+        public IEnumerable<IEdition> Editions { get; }
 
         public override string ToString() => $"{Id} : {Name}";
 
@@ -40,7 +42,8 @@ namespace BooksCatalogueDb.Application
                                                                  book.OriginalPublisherId, 
                                                                  (null== book.OriginalPublisher) ?"":book.OriginalPublisher.Name,
                                                                  book.Synopsis,
-                                                                 book.YearFirst);
+                                                                 book.YearFirst, Edition.MapFromDb(book.Editions));
+
         internal static BookDb MapToDb(IBook book) => new BookDb
         {
             Id = book.Id,

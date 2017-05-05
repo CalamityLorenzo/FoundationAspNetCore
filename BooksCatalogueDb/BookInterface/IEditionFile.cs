@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BooksCatalogueDb.BookInterface
 {
-    interface IEditionFile 
+    public interface IEditionFile 
     {
          string FileType { get;  }
          string FileUrl { get;  }

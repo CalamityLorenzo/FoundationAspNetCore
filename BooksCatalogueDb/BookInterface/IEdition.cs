@@ -5,13 +5,14 @@ using System.Text;
 
 namespace BooksCatalogueDb.BookInterface
 {
-    interface IEdition
+    public interface IEdition
     {
-         string AlternativeName { get; set; }
-         DateTime DateReleased { get; set; }
-         string CoverThumUrl { get; set; }
-         Publisher Publisher { get; set; }
-         string DescriptionText { get; set; }
-         IEnumerable<IEditionFile> EditionFiles { get; set; }
+         string AlternativeName { get; }
+         DateTime DateReleased { get; }
+         string CoverThumUrl { get; }
+         string Publisher { get; }
+         int PublisherId { get; }
+         string DescriptionText { get; }
+         IEnumerable<IEditionFile> EditionFiles { get; }
     }
 }
