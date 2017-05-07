@@ -12,7 +12,7 @@ namespace DbTests
     {
         static void Main(string[] args)
         {
-      //      DoThings().Wait();
+            DoThings().Wait();
         }
 
         static async Task DoThings()
@@ -27,6 +27,14 @@ namespace DbTests
             {
 
             }
+
+            EditionsCatalouge ec = new EditionsCatalouge();
+            var editions  = ec.GetEditionsForBook(1);
+            var files = editions.ElementAt(0);
+            ;
+
+
+
 
             //Ac.Add(new ClientAuthor
             //{

@@ -12,6 +12,5 @@ namespace BooksCatalogueDb.BookInterface
         string OriginalPublisher { get; }
         string Synopsis { get; }
         int YearFirst { get; }
-        IEnumerable<IEdition> Editions { get; }
     }
 }

@@ -21,8 +21,9 @@ namespace BooksCatalogueDb.Application
             this.Authors = new AuthorsCatalogue(ctx);
             this.Books = new BooksCatalogue(ctx);
             this.Publishers = new PublishersCatalogue(ctx);
-
+            this.Editions = new EditionsCatalouge(ctx);
         }
+
         // Can thqis be done ina dll agnostic manner vis a vis DbType + DbconnectionString
         //public BooksDatabaseApp(IDbType dbType)
         //{
@@ -30,12 +31,10 @@ namespace BooksCatalogueDb.Application
             
         //}
 
-
         public AuthorsCatalogue Authors {get;}
         public BooksCatalogue Books { get; }
         public PublishersCatalogue Publishers { get; }
-
-        
+        public EditionsCatalouge Editions { get; }
 
         public void Dispose()
         {

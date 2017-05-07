@@ -4,8 +4,9 @@ using System.Text;
 
 namespace BooksCatalogueDb.BookInterface
 {
-    public interface IEditionFile 
+    public interface IEditionFile :IBaseEntity
     {
+            int EditionId { get; }
          string FileType { get;  }
          string FileUrl { get;  }
          string FileFormat { get;  }

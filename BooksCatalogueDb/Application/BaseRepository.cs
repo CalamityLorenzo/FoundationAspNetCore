@@ -1,11 +1,11 @@
 ﻿using BooksCatalogueDb.BookInterface;
+using BooksCatalogueDb.Database;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using System.Linq;
-using BooksCatalogueDb.Database;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace BooksCatalogueDb.Application
 {
@@ -17,7 +17,7 @@ namespace BooksCatalogueDb.Application
         internal virtual Func<EntityDB, IApp> MapFromDb { get; }
         internal virtual Func<IApp, EntityDB> MapToDb { get; }
         internal Func<IEnumerable<IApp>, IEnumerable<EntityDB>> MapAllToDb => (appEntities) => appEntities.Select(MapToDb);
-        internal Func<IQueryable<EntityDB>, IEnumerable<IApp>> MappAllFromDb => (dbEntities) => dbEntities.Select(MapFromDb);
+        internal Func<IQueryable<EntityDB>, IEnumerable<IApp>> MapAllFromDb => (dbEntities) => dbEntities.Select(MapFromDb);
         internal BaseRepository(DbContext ctx)
         {
             this.ctx = ctx;

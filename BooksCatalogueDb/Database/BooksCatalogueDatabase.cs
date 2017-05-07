@@ -45,6 +45,7 @@ namespace BooksCatalogueDb.Database
 
             modelBuilder.Entity<EditionDb>()
                 .HasKey(o => o.Id);
+
             modelBuilder.Entity<EditionFileDb>()
                 .HasKey(o => o.Id);
 
@@ -84,11 +85,13 @@ namespace BooksCatalogueDb.Database
 
 
             modelBuilder.Entity<EditionDb>()
-             .HasOne(o => o.Book).WithMany(o => o.Editions);
-
+             .Property(o => o.PublisherId).HasColumnName("Publisher");
+            
+    
             modelBuilder.Entity<EditionFileDb>()
                 .HasOne(o => o.Edition).WithMany(o => o.EditionFiles);
-
+            modelBuilder.Entity<EditionFileDb>()
+                .Property(o => o.EditionId).HasColumnName("Edition");
         }
     }
 
@@ -106,7 +109,6 @@ namespace BooksCatalogueDb.Database
             this.Authors = new List<BookAuthor>();
 
         }
-
 
         public string Name { get; set; }
         public int Genre { get; set; }
@@ -151,7 +153,7 @@ namespace BooksCatalogueDb.Database
         public int YearOfBirth { get; set; }
         public int? YearOfDeath { get; set; }
         public string Bio { get; set; }
-        public List<BookAuthor> Books { get; set; }
+        public virtual ICollection<BookAuthor> Books { get; set; }
 
     }
 
@@ -176,10 +178,12 @@ namespace BooksCatalogueDb.Database
         public string AlternativeName { get; set; }
         public DateTime DateReleased { get; set; }
         public string CoverThumbUrl { get; set; }
+        public string Isbn { get; set; }
+        public bool IsFirstEdition { get; set; }
         public int PublisherId { get; set; }
         public PublisherDb Publisher { get; set; }
         public string DescriptionText { get; set; }
-        public ICollection<EditionFileDb> EditionFiles { get; set; }
+        public virtual ICollection<EditionFileDb> EditionFiles { get; set; }
     }
 
     public class EditionFileDb : BaseEntity

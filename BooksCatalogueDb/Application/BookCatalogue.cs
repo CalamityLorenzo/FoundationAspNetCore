@@ -23,13 +23,13 @@ namespace BooksCatalogueDb.Application
 
         public IEnumerable<IBook> GetAllBooksInfo()
         {
-            return MappAllFromDb(DbEnties.AsNoTracking()).ToList();
+            return MapAllFromDb(DbEnties.AsNoTracking()).ToList();
         }
 
         public IEnumerable<IBook> GetAllBooksForAuthor(IAuthor author)
         {
             var BookAuthors = ctx.Set<BookAuthor>();
-            return this.MappAllFromDb(
+            return this.MapAllFromDb(
                     BookAuthors.Include(o => o.Author)
                     .Where(o => o.Author == author)
                     .Select(o => o.Book)).ToList();
@@ -37,8 +37,18 @@ namespace BooksCatalogueDb.Application
 
         public IEnumerable<IBook> GetAllBooksForPublisher(IPublisher publisher)
         {
-            return this.MappAllFromDb(DbEnties.Where(o => o.OriginalPublisherId == publisher.Id)).ToList();
+            return this.MapAllFromDb(DbEnties.Where(o => o.OriginalPublisherId == publisher.Id)).ToList();
         }
+
+        //public IEnumerable<IEdition> GetEditionsForBook(IBook Book)
+        //{
+        //    return this.MappAllFromDb(DbEnties.Include(o=>o.Editions).Where(o => o.Id == Book.Id).Select(o=>o.Editions).ToList();
+        //}
+
+        //public IEnumerable<IEdition> GetEditionsForBook(int BookId)
+        //{
+
+        //}
 
     }
 }

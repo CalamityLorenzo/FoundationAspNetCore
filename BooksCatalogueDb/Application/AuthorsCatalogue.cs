@@ -27,7 +27,7 @@ namespace BooksCatalogueDb.Application
         public IEnumerable<IGrouping<char, IAuthor>> AuthorsGroupedByLastName()
         {
             // Simply grouped by the first character of tehir last name
-            var GrpdAutors = MappAllFromDb(DbEnties).GroupBy(o => o.LastName.First());
+            var GrpdAutors = MapAllFromDb(DbEnties).GroupBy(o => o.LastName.First());
             return GrpdAutors.ToList();
         }
 
