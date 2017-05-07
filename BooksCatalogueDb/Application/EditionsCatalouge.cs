@@ -2,8 +2,9 @@
 using BooksCatalogueDb.Database;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace BooksCatalogueDb.Application
@@ -25,6 +26,11 @@ namespace BooksCatalogueDb.Application
         {
             var itms = this.DbEnties.Include(o => o.EditionFiles).Where(o => o.BookId == bookId);
             return this.MapAllFromDb(itms);
+        }
+
+        async void Update(IEnumerable<IEdition> Editions)
+        {
+            await Task.WhenAll(Editions.ToList().Select(async o => await Update(o)));
         }
 
     }

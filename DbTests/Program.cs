@@ -3,8 +3,10 @@ using BooksCatalogueDb;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Collections.Generic;
 using BooksCatalogueDb.Application;
 using BooksCatalogueDb.BookInterface;
+using DbTests.Client;
 
 namespace DbTests
 {
@@ -22,19 +24,23 @@ namespace DbTests
 
             AuthorsCatalogue Ac = new AuthorsCatalogue();
             var names = Ac.AuthorsGroupedByLastName();
-            
-            using(var bookBomb= new BooksDatabaseApp())
+
+            using (var bookBomb = new BooksDatabaseApp())
             {
 
             }
 
             EditionsCatalouge ec = new EditionsCatalouge();
-            var editions  = ec.GetEditionsForBook(1);
-            var files = editions.ElementAt(0);
-            ;
+            var editions = new List<ClientEdition>();
+            List<IEdition> dbEditions = ec.GetEditionsForBook(1).ToList();
 
+            IEdition myEdition = dbEditions[0];
 
+            ClientEdition Ce = myEdition as ClientEdition;
 
+            Console.WriteLine(Ce == null);
+
+            // editions.AddRange(dbEditions as List<ClientEdition>);
 
             //Ac.Add(new ClientAuthor
             //{
@@ -47,8 +53,10 @@ namespace DbTests
 
             //names.SelectMany(d => d).ToList().ForEach(Console.WriteLine);
             //Ac.Add(new ClientAuthor { FirstName = "Claude", LastName = "PoundHammer", YearOfBirth = 1987, Bio="Watrnifn", ThumbNailUrl="" });
-             //bc.Add(new ClientBook { Genre = (BookGenre)1025, Name = "JEnny the Book", OriginalPublisherId=1,  Synopsis = "", YearFirst = 1835 });
+            //bc.Add(new ClientBook { Genre = (BookGenre)1025, Name = "JEnny the Book", OriginalPublisherId=1,  Synopsis = "", YearFirst = 1835 });
         }
+
+
 
         //class ClientBook : IBook
         //{
