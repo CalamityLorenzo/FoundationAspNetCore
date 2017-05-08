@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DbTests.Client
 {
-    class ClientEditionFile : IEditionFile
+    internal class ClientEditionFile : IEditionFile
     {
-        public ClientEditionFile(int Id, int EditionId, string FileType, string FileFormat, string FileUrl) : this(EditionId, FileType, FileFormat, FileUrl)
+        public ClientEditionFile(int Id, int EditionId, string FileType, string FileFormat, string FileUrl) : this(EditionId, FileFormat, FileFormat, FileUrl)
         {
             this.Id = Id;
         }
@@ -15,19 +15,16 @@ namespace DbTests.Client
         public ClientEditionFile(int EditionId, string FileType, string FileFormat, string FileUrl)
         {
             this.EditionId = EditionId;
-            this.FileType = FileType;
-            this.FileFormat = FileFormat;
-            this.FileUrl = FileUrl;
+            this.Url = FileUrl;
+            this.Type = FileType;
+            this.Format = FileFormat;
         }
 
-        public int EditionId{get;}
-
-        public string FileType{get;}
-
-        public string FileUrl{get;}
-
-        public string FileFormat{get;}
-
-        public int Id{get;}
+        public int Id { get; }
+        public int EditionId { get; }
+        public string Title { get; }
+        public string Type { get; }
+        public string Url { get; }
+        public string Format { get; }
     }
 }
