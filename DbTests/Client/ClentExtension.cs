@@ -15,12 +15,14 @@ namespace DbTests.Client
 
         public static IEdition ToClient(this IEdition @this)
         {
-            return null;
+            return new ClientEdition(@this.Id, @this.BookId, @this.Isbn, @this.AlternativeName, @this.CoverThumUrl, @this.DescriptionText, @this.EditionFiles);
         }
 
         public static IEditionFile ToClient(this IEditionFile @this)
         {
-            return null;
+            return new ClientEditionFile(@this.Id, @this.EditionId,  @this.FileType, @this.FileFormat, @this.FileUrl);
         }
+
+
     }
 }

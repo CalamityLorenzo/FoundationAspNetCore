@@ -7,14 +7,27 @@ namespace DbTests.Client
 {
     class ClientEditionFile : IEditionFile
     {
-        public int EditionId{get;set;}
+        public ClientEditionFile(int Id, int EditionId, string FileType, string FileFormat, string FileUrl) : this(EditionId, FileType, FileFormat, FileUrl)
+        {
+            this.Id = Id;
+        }
 
-        public string FileType{get;set;}
+        public ClientEditionFile(int EditionId, string FileType, string FileFormat, string FileUrl)
+        {
+            this.EditionId = EditionId;
+            this.FileType = FileType;
+            this.FileFormat = FileFormat;
+            this.FileUrl = FileUrl;
+        }
 
-        public string FileUrl{get;set;}
+        public int EditionId{get;}
 
-        public string FileFormat{get;set;}
+        public string FileType{get;}
 
-        public int Id{get;set;}
+        public string FileUrl{get;}
+
+        public string FileFormat{get;}
+
+        public int Id{get;}
     }
 }

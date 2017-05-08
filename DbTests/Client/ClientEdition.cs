@@ -7,24 +7,42 @@ namespace DbTests.Client
 {
     class ClientEdition : IEdition
     {
-        public int BookId {get;set;}
+        public ClientEdition(int Id, int BookId, string AlternativeName, bool IsFirstEdition, DateTime DateReleased, string Isbn, string CoverThumbUrl, string DescriptionText, int PublishedId, IEnumerable<IEditionFile> EditionFiles): this(BookId, AlternativeName, IsFirstEdition, DateReleased, Isbn, CoverThumbUrl, DescriptionText, PublishedId, EditionFiles)
+        {
+            this.Id = Id;
+        }
 
-        public string AlternativeName {get;set;}
+        public ClientEdition(int BookId, string AlternativeName, bool IsFirstEdition, DateTime DateReleased, string Isbn, string CoverThumbUrl, string DescriptionText, int PublisherId, IEnumerable<IEditionFile> EditionFiles)
+        {
+            this.BookId = BookId;
+            this.AlternativeName = AlternativeName;
+            this.DateReleased = DateReleased;
+            this.Isbn = Isbn;
+            this.CoverThumUrl = CoverThumUrl;
+            this.DescriptionText = DescriptionText;
+            this.PublisherId = PublisherId;
+            this.EditionFiles = EditionFiles;
+            this.IsFirstEdition = IsFirstEdition;
+        }
 
-        public DateTime DateReleased {get;set;}
+        public int BookId {get;}
 
-        public string CoverThumUrl {get;set;}
+        public string AlternativeName {get;}
 
-        public int PublisherId {get;set;}
+        public DateTime DateReleased {get;}
 
-        public string DescriptionText {get;set;}
+        public string CoverThumUrl {get;}
 
-        public bool IsFirstEdition {get;set;}
+        public int PublisherId {get;}
 
-        public string Isbn {get;set;}
+        public string DescriptionText {get;}
 
-        public IEnumerable<IEditionFile> EditionFiles {get;set;}
+        public bool IsFirstEdition {get;}
 
-        public int Id {get;set;}
+        public string Isbn {get;}
+
+        public IEnumerable<IEditionFile> EditionFiles {get;}
+
+        public int Id {get;}
     }
 }
