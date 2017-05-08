@@ -34,7 +34,7 @@ namespace DbTests
             var editions = new List<ClientEdition>();
             List<IEdition> dbEditions = ec.GetEditionsForBook(1).ToList();
 
-            IEdition myEdition = dbEditions[0];
+            IEdition myEdition = dbEditions[0].ToClient();
 
             ClientEdition Ce = myEdition as ClientEdition;
 

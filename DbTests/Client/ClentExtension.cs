@@ -8,19 +8,19 @@ namespace DbTests.Client
 {
     public static class ClentExtension
     {
-        public static IBook ToClient(this IBook @this)
+        internal static ClientBook ToClient(this IBook @this)
         {
-            return null;
+            return new ClientBook(@this.Id, @this.Name, @this.Genre, @this.OriginalPublisherId, @this.Synopsis, @this.YearFirst);
         }
 
-        public static IEdition ToClient(this IEdition @this)
+        internal static ClientEdition ToClient(this IEdition @this)
         {
-            return null;
+            return new ClientEdition(@this.Id, @this.BookId, @this.AlternativeName, @this.DateReleased, @this.PublisherId, @this.CoverThumUrl, @this.DescriptionText, @this.IsFirstEdition, @this.Isbn, @this.EditionFiles);
         }
 
-        public static IEditionFile ToClient(this IEditionFile @this)
+        internal static ClientEditionFile ToClient(this IEditionFile @this)
         {
-            return null;
+            return new ClientEditionFile(@this.Id, @this.EditionId, @this.Type, @this.Format, @this.Url);
         }
     }
 }

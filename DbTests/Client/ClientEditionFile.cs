@@ -5,16 +5,26 @@ using System.Text;
 
 namespace DbTests.Client
 {
-    class ClientEditionFile : IEditionFile
+    internal class ClientEditionFile : IEditionFile
     {
-        public int EditionId{get;set;}
+        public ClientEditionFile(int Id, int EditionId, string FileType, string FileFormat, string FileUrl) : this(EditionId, FileFormat, FileFormat, FileUrl)
+        {
+            this.Id = Id;
+        }
 
-        public string FileType{get;set;}
+        public ClientEditionFile(int EditionId, string FileType, string FileFormat, string FileUrl)
+        {
+            this.EditionId = EditionId;
+            this.Url = FileUrl;
+            this.Type = FileType;
+            this.Format = FileFormat;
+        }
 
-        public string FileUrl{get;set;}
-
-        public string FileFormat{get;set;}
-
-        public int Id{get;set;}
+        public int Id { get; }
+        public int EditionId { get; }
+        public string Title { get; }
+        public string Type { get; }
+        public string Url { get; }
+        public string Format { get; }
     }
 }

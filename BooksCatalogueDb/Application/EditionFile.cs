@@ -10,7 +10,7 @@ namespace BooksCatalogueDb.Application
     class EditionFile : IEditionFile
     {
 
-        internal EditionFile(int Id, int EditionId, string FileType, string FileUrl, string FileFormat) : this(EditionId, FileType, FileUrl, FileFormat)
+        internal EditionFile(int Id, int EditionId, string Title, string FileType, string FileUrl, string FileFormat) : this(EditionId, Title, FileType, FileUrl, FileFormat)
         {
             if (Id <= 0)
             {
@@ -25,13 +25,13 @@ namespace BooksCatalogueDb.Application
             {
                 throw new ArgumentOutOfRangeException("We need an edition reference");
             }
-            this.EditionId = EditionId;
-            this.FileFormat = FileFormat;
-            this.FileType = FileType;
-            this.FileUrl = FileUrl;
+            this.EditionId = Edition.Id;
+            this.Format = FileFormat;
+            this.Type = FileType;
+            this.Url = FileUrl;
         }
 
-        public EditionFile(int EditionId, string FileType, string FileUrl, string FileFormat)
+        public EditionFile(int EditionId, string Title, string FileType, string FileUrl, string FileFormat)
         {
             if (EditionId <= 0)
             {
@@ -39,10 +39,17 @@ namespace BooksCatalogueDb.Application
             }
 
             this.EditionId = EditionId;
-            this.FileFormat = FileFormat;
-            this.FileType = FileType;
-            this.FileUrl = FileUrl;
+            this.Format = FileFormat;
+            this.Type = FileType;
+            this.Url = FileUrl;
+            this.Title = Title;
         }
+        public int Id { get; }
+        public int EditionId { get; }
+        public string Type { get; }
+        public string Url { get; }
+        public string Format { get; }
+        public string Title { get; }
 
         internal static IEnumerable<EditionFileDb> MapAllToDb(IEnumerable<IEditionFile> editionFiles)
         {
@@ -55,18 +62,14 @@ namespace BooksCatalogueDb.Application
             {
                 Id = edFile.Id,
                 EditionId = edFile.EditionId,
-                FileFormat = edFile.FileFormat,
-                FileType = edFile.FileType,
-                FileUrl = edFile.FileUrl
+                Format = edFile.Format,
+                Type = edFile.Type,
+                Url = edFile.Url
             };
 
         }
 
-        public int Id { get; }
-        public int EditionId { get; }
-        public string FileType { get; }
-        public string FileUrl { get; }
-        public string FileFormat { get; }
+
 
         internal static IEnumerable<IEditionFile> MapFromDb(ICollection<EditionFileDb> editionFiles)
         {
@@ -78,7 +81,7 @@ namespace BooksCatalogueDb.Application
 
         internal static IEditionFile MapFromDb(EditionFileDb editionFile)
         {
-            return new EditionFile(editionFile.Id, editionFile.FileType, editionFile.FileUrl, editionFile.FileFormat);
+            return new EditionFile(editionFile.Id, editionFile.EditionId, editionFile.Title, editionFile.Type, editionFile.Url, editionFile.Format);
         }
     }
 }

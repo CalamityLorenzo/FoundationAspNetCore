@@ -157,7 +157,6 @@ namespace BooksCatalogueDb.Database
 
     }
 
-
     public class PublisherDb : BaseEntity
     {
         public string Name { get; set; }
@@ -190,8 +189,9 @@ namespace BooksCatalogueDb.Database
     {
         public int EditionId { get; set; }
         public EditionDb Edition { get; set; }
-        public string FileUrl { get; set; }
-        public string FileType { get; set; }
-        public string FileFormat { get; set; }
+        public string Title { get; set; }
+        public string Url { get; set; }
+        public string Type { get; set; }
+        public string Format { get; set; }
     }
 }
