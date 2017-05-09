@@ -11,8 +11,16 @@ namespace BooksCatalogueDb.Application
 {
     public class EditionsCatalouge : BaseRepository<EditionDb, IEdition>
     {
-        internal EditionsCatalouge(DbContext ctx) : base(ctx){}
-        public EditionsCatalouge():base() { }
+        private EditionFilesCatalogue EditionFilesCatalogueData;
+        internal EditionsCatalouge(DbContext ctx) : base(ctx)
+        {
+            EditionFilesCatalogueData = new EditionFilesCatalogue(ctx);
+        }
+        public EditionsCatalouge() : base()
+        {
+            EditionFilesCatalogueData = new EditionFilesCatalogue();
+        }
+
 
         internal override Func<EditionDb, IEdition> MapFromDb => Edition.MapFromDb;
         internal override Func<IEdition, EditionDb> MapToDb => Edition.MapToDb;
@@ -25,6 +33,7 @@ namespace BooksCatalogueDb.Application
         public IEnumerable<IEdition> GetEditionsForBook(int bookId)
         {
             var itms = this.DbEnties.Include(o => o.EditionFiles).Where(o => o.BookId == bookId);
+
             return this.MapAllFromDb(itms);
         }
 
@@ -32,6 +41,28 @@ namespace BooksCatalogueDb.Application
         {
             await Task.WhenAll(Editions.ToList().Select(async o => await Update(o)));
         }
+        // SUB CLASS! //
+        class EditionFilesCatalogue : BaseRepository<EditionFileDb, IEditionFile>
+        {
+            internal EditionFilesCatalogue(DbContext ctx) : base(ctx) { }
+            public EditionFilesCatalogue() : base() { }
+            internal override Func<EditionFileDb, IEditionFile> MapFromDb => EditionFile.MapFromDb;
+            internal override Func<IEditionFile, EditionFileDb> MapToDb => EditionFile.MapToDb;
 
+            public IEnumerable<IEditionFile> GetFilesForEdition(int editionId)
+            {
+                return this.MapAllFromDb(DbEnties.Where(o => o.Id == editionId));
+            }
+            public IEnumerable<IEditionFile> GetFilesForEdition(IEdition edition)
+            {
+                if (edition.Id == 0)
+                {
+                    throw new ArgumentOutOfRangeException("You must have an Id");
+                }
+
+                return GetFilesForEdition(edition.Id);
+            }
+
+        }
     }
 }

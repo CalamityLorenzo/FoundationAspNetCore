@@ -68,6 +68,7 @@
     <Build Include="Tables\Editions.sql" />
     <Build Include="Tables\EditionFiles.sql" />
     <Build Include="Tables\BookAuthors.sql" />
+    <Build Include="PostData\dbo.EditionFiles.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BooksCatalogue.refactorlog" />

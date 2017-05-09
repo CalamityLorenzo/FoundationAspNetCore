@@ -56,7 +56,7 @@ namespace BooksCatalogueDb.Application
             return editionFiles.Select(o => EditionFile.MapToDb(o));
         }
 
-        private static EditionFileDb MapToDb(IEditionFile edFile)
+        internal static EditionFileDb MapToDb(IEditionFile edFile)
         {
             return new EditionFileDb
             {
