@@ -35,18 +35,39 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="dest\foundyApp.js" />
+    <Content Include="HackerNewsTut\dest\app.css" />
+    <Content Include="HackerNewsTut\dest\foundyApp.js" />
+    <Content Include="HackerNewsTut\dest\newsHeader.css" />
+    <Content Include="HackerNewsTut\dest\NewsItem.css" />
+    <Content Include="HackerNewsTut\dest\newsLIst.css" />
+    <Content Include="img\grayarrow2x.gif" />
+    <Content Include="img\y18.gif" />
     <Content Include="index.html" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="HackerNewsTut\dest\foundyApp.js.map" />
+    <None Include="json\items.json" />
     <None Include="package.json" />
     <None Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="HackerNewsTut\Components\NewsHeader.tsx" />
+    <TypeScriptCompile Include="HackerNewsTut\Components\NewsItem.tsx" />
+    <TypeScriptCompile Include="HackerNewsTut\Components\NewsList.tsx" />
+    <TypeScriptCompile Include="HackerNewsTut\NewsInterfaces.ts" />
+    <TypeScriptCompile Include="HackerNewsTut\NewsItemTest.tsx" />
+    <TypeScriptCompile Include="src\components\container.tsx" />
+    <TypeScriptCompile Include="src\components\FileDocWrapper.tsx" />
     <TypeScriptCompile Include="src\components\Hello.tsx" />
+    <TypeScriptCompile Include="src\components\itemThing.tsx" />
     <TypeScriptCompile Include="src\components\Trouble.tsx" />
+    <TypeScriptCompile Include="src\DocFilesIndex.tsx" />
+    <TypeScriptCompile Include="src\DocStorageInterfaces.ts" />
     <TypeScriptCompile Include="src\index.tsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="dest\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

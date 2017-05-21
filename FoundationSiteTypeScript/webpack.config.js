@@ -1,11 +1,11 @@
 const webpack = require('webpack');
 const config = {
-    entry: "./src/index.tsx",
+    entry: "./src/DocFilesIndex.tsx",
     output: {
         filename: "foundyApp.js",
         path: __dirname + "/dest"
     },
-    devtool:"source-amp",
+    devtool:"source-map",
 
     resolve:{
         extensions:[".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".json"]
@@ -22,7 +22,7 @@ const config = {
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
                 enforce:"pre",
-                test: /\.js?$/,
+                test: /\.js$/,
                 loader:"source-map-loader"
             }
         ]
@@ -32,9 +32,13 @@ const config = {
     // This is important because it allows us to avoid bundling all of our
     // dependencies, which allows browsers to cache those libraries between builds.
     externals: {
+        // node_modules name, external name
         "react": "React",
-        "react-dom": "ReactDOM"
+        "react-dom": "ReactDOM",
+        "jquery": "$",
+        "moment": "moment",
+        "lodash": "_"
     },
-}
+} 
 
 module.exports = config;

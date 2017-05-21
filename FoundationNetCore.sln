@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoundationNetCore", "FoundationNetCore\FoundationNetCore.csproj", "{E26D9A7B-6CE8-496E-9781-8BC205FA9A9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoundationNetCore - NoAuth", "FoundationNetCore\FoundationNetCore - NoAuth.csproj", "{E26D9A7B-6CE8-496E-9781-8BC205FA9A9E}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BooksCatalogue", "BooksCatalogue\BooksCatalogue.sqlproj", "{CE67A514-74F7-41B3-AB00-F92BBD9A2811}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTests", "DbTests\DbTests.csproj", "{0D913A72-4E13-40FF-B66F-E9FB9F524670}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoundationSiteTypeScript", "FoundationSiteTypeScript\FoundationSiteTypeScript.csproj", "{BBB0EB73-19DD-48CC-964C-210182D37A41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoundationNetCore-AzureAuth", "FoundationNetCore-AzureAuth\FoundationNetCore-AzureAuth.csproj", "{18E3FFE8-9D2A-45B4-9886-31A05351DB46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{BBB0EB73-19DD-48CC-964C-210182D37A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBB0EB73-19DD-48CC-964C-210182D37A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBB0EB73-19DD-48CC-964C-210182D37A41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18E3FFE8-9D2A-45B4-9886-31A05351DB46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18E3FFE8-9D2A-45B4-9886-31A05351DB46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18E3FFE8-9D2A-45B4-9886-31A05351DB46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18E3FFE8-9D2A-45B4-9886-31A05351DB46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
