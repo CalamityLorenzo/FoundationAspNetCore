@@ -6,7 +6,7 @@ export const FileDocumentContainer  = (props:IAllDocuments)=>
                         <div>
                             <h1>{props.CollectionName}</h1>
                             <div>
-                           {_(props.Files).map(function(FileItm:IDocumentInfo,idx:number){
+                            {_(props.Files).map(function(FileItm:IDocumentInfo,idx:number){
                              return (<FileDocument key={FileItm.Id} Item={FileItm}  />)
                            }.bind(this)).value()}
                             </div>
