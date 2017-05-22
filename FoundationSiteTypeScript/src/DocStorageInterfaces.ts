@@ -10,7 +10,7 @@ export interface IDocumentInfo{
     UploadedDate:number;
 }
 
-export interface IDocumentItem{
+export interface  IDocumentItem{
     Item:IDocumentInfo;
 }
 

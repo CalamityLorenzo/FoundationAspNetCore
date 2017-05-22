@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1636,7 +1636,7 @@ var ReactCurrentOwner = __webpack_require__(5);
 var ReactComponentTreeHook = __webpack_require__(9);
 var ReactElement = __webpack_require__(3);
 
-var checkReactTypeSpec = __webpack_require__(32);
+var checkReactTypeSpec = __webpack_require__(34);
 
 var canDefineProperty = __webpack_require__(6);
 var getIteratorFn = __webpack_require__(16);
@@ -1967,6 +1967,84 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 /* 18 */
+/***/ (function(module, exports) {
+
+module.exports = React;
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var _this = this;
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(18);
+var _ = __webpack_require__(40);
+var FileDocument_1 = __webpack_require__(23);
+exports.FileDocumentContainer = function (props) {
+    return React.createElement("div", null,
+        React.createElement("h1", null, props.CollectionName),
+        React.createElement("div", null, _(props.Files).map(function (FileItm, idx) {
+            return (React.createElement(FileDocument_1.FileDocument, { key: FileItm.Id, Item: FileItm }));
+        }.bind(_this)).value()));
+};
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(26);
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+module.exports = ReactDOM;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(20);
+var ReactDOM = __webpack_require__(21);
+var FileDocWrapper_1 = __webpack_require__(19);
+// create dumment Entries
+var files = [
+    { Id: "1234", Url: "https://google.com",
+        FileName: "TheFileName.docx", Title: "Title one", Description: "Long winded words about things",
+        FileType: "docx", UploadedBy: "Paul Lawrence", UploadedDate: 1495386000413 },
+    { Id: "12345", Url: "https://bing.com",
+        FileName: "AfileNAme.docx", Title: "Title Twoses", Description: "Blah Blah ",
+        FileType: "docx", UploadedBy: "Paul Lawrence", UploadedDate: 1495386000413 },
+];
+var collection = {
+    CollectionName: "My list of Files",
+    Files: files
+};
+ReactDOM.render(React.createElement(FileDocWrapper_1.FileDocumentContainer, { Files: collection.Files, CollectionName: collection.CollectionName }), document.getElementById("docs"));
+//ReactDOM.render(<FileDocument Item={files[0]} />, document.getElementById("docs") );
+/* <FileDocument FileType={files[0].FileType}
+                             Id={files[0].Id}
+                             Url={files[0].Url}
+                             Description={files[0].Description}
+                             FileName={files[0].FileName}
+                             Title={files[0].Title}
+                             UploadedBy={files[0].UploadedBy}
+                              UploadedDate={files[0].UploadedDate}
+                              */ 
+
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1981,16 +2059,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(38);
-var _ = __webpack_require__(39);
-var FileDocuments = (function (_super) {
-    __extends(FileDocuments, _super);
-    function FileDocuments() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var React = __webpack_require__(18);
+var FileDocument = (function (_super) {
+    __extends(FileDocument, _super);
+    function FileDocument(props) {
+        return _super.call(this, props) || this;
     }
-    FileDocuments.prototype.render = function () {
+    FileDocument.prototype.render = function () {
         return React.createElement("div", null,
             React.createElement("div", { className: "fileRow row" },
                 React.createElement("div", { className: "small-1 columns" },
@@ -2004,62 +2080,13 @@ var FileDocuments = (function (_super) {
                 React.createElement("div", { className: "small-2 columns" },
                     React.createElement("span", null, this.props.Item.UploadedDate))));
     };
-    return FileDocuments;
+    return FileDocument;
 }(React.Component));
-exports.FileDocuments = FileDocuments;
-exports.FileDocumentContainer = function (props) {
-    return React.createElement("div", null,
-        React.createElement("h1", null, props.CollectionName),
-        React.createElement("div", null, _(_this.props.Files).map(function (FileItm, idx) {
-            return (React.createElement(FileDocuments, { key: FileItm.Id, Item: FileItm }));
-        })));
-};
+exports.FileDocument = FileDocument;
 
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(24);
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-module.exports = ReactDOM;
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(19);
-var ReactDOM = __webpack_require__(20);
-var FileDocWrapper_1 = __webpack_require__(18);
-// create dumment Entries
-var files = [
-    { Id: "1234", Url: "https://google.com",
-        FileName: "TheFileName.docx", Title: "Title one", Description: "Long winded words about things",
-        FileType: "docx", UploadedBy: "Paul Lawrence", UploadedDate: 1495386000413 },
-    { Id: "12345", Url: "https://bing.com",
-        FileName: "AfileNAme.docx", Title: "Title Twoses", Description: "Blah Blah ",
-        FileType: "docx", UploadedBy: "Paul Lawrence", UploadedDate: 1495386000413 },
-];
-var collection = {
-    CollectionName: "Myt list of Files",
-    Files: files
-};
-ReactDOM.render(React.createElement(FileDocWrapper_1.FileDocumentContainer, { Files: collection.Files, CollectionName: collection.CollectionName }), document.getElementById("docs"));
-
-
-/***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2123,7 +2150,7 @@ var KeyEscapeUtils = {
 module.exports = KeyEscapeUtils;
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2241,7 +2268,7 @@ module.exports = PooledClass;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2259,16 +2286,16 @@ module.exports = PooledClass;
 
 var _assign = __webpack_require__(7);
 
-var ReactChildren = __webpack_require__(25);
+var ReactChildren = __webpack_require__(27);
 var ReactComponent = __webpack_require__(8);
-var ReactPureComponent = __webpack_require__(30);
-var ReactClass = __webpack_require__(26);
-var ReactDOMFactories = __webpack_require__(27);
+var ReactPureComponent = __webpack_require__(32);
+var ReactClass = __webpack_require__(28);
+var ReactDOMFactories = __webpack_require__(29);
 var ReactElement = __webpack_require__(3);
-var ReactPropTypes = __webpack_require__(28);
-var ReactVersion = __webpack_require__(31);
+var ReactPropTypes = __webpack_require__(30);
+var ReactVersion = __webpack_require__(33);
 
-var onlyChild = __webpack_require__(33);
+var onlyChild = __webpack_require__(35);
 var warning = __webpack_require__(1);
 
 var createElement = ReactElement.createElement;
@@ -2351,7 +2378,7 @@ module.exports = React;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2367,11 +2394,11 @@ module.exports = React;
 
 
 
-var PooledClass = __webpack_require__(23);
+var PooledClass = __webpack_require__(25);
 var ReactElement = __webpack_require__(3);
 
 var emptyFunction = __webpack_require__(11);
-var traverseAllChildren = __webpack_require__(34);
+var traverseAllChildren = __webpack_require__(36);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
 var fourArgumentPooler = PooledClass.fourArgumentPooler;
@@ -2547,7 +2574,7 @@ var ReactChildren = {
 module.exports = ReactChildren;
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3276,7 +3303,7 @@ module.exports = ReactClass;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3452,7 +3479,7 @@ module.exports = ReactDOMFactories;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3471,12 +3498,12 @@ module.exports = ReactDOMFactories;
 var _require = __webpack_require__(3),
     isValidElement = _require.isValidElement;
 
-var factory = __webpack_require__(36);
+var factory = __webpack_require__(38);
 
 module.exports = factory(isValidElement);
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3498,7 +3525,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3545,7 +3572,7 @@ ReactPureComponent.prototype.isPureReactComponent = true;
 module.exports = ReactPureComponent;
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3564,7 +3591,7 @@ module.exports = ReactPureComponent;
 module.exports = '15.5.4';
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3583,7 +3610,7 @@ module.exports = '15.5.4';
 var _prodInvariant = __webpack_require__(4);
 
 var ReactPropTypeLocationNames = __webpack_require__(15);
-var ReactPropTypesSecret = __webpack_require__(29);
+var ReactPropTypesSecret = __webpack_require__(31);
 
 var invariant = __webpack_require__(2);
 var warning = __webpack_require__(1);
@@ -3657,7 +3684,7 @@ module.exports = checkReactTypeSpec;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3701,7 +3728,7 @@ module.exports = onlyChild;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3724,7 +3751,7 @@ var REACT_ELEMENT_TYPE = __webpack_require__(13);
 
 var getIteratorFn = __webpack_require__(16);
 var invariant = __webpack_require__(2);
-var KeyEscapeUtils = __webpack_require__(22);
+var KeyEscapeUtils = __webpack_require__(24);
 var warning = __webpack_require__(1);
 
 var SEPARATOR = '.';
@@ -3883,7 +3910,7 @@ module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3952,7 +3979,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3971,7 +3998,7 @@ module.exports = checkPropTypes;
 // Therefore we re-export development-only version with all the PropTypes checks here.
 // However if one is migrating to the `prop-types` npm library, they will go through the
 // `index.js` entry point, and it will branch depending on the environment.
-var factory = __webpack_require__(37);
+var factory = __webpack_require__(39);
 module.exports = function(isValidElement) {
   // It is still allowed in 15.5.
   var throwOnDirectAccess = false;
@@ -3980,7 +4007,7 @@ module.exports = function(isValidElement) {
 
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4000,7 +4027,7 @@ var invariant = __webpack_require__(2);
 var warning = __webpack_require__(1);
 
 var ReactPropTypesSecret = __webpack_require__(17);
-var checkPropTypes = __webpack_require__(35);
+var checkPropTypes = __webpack_require__(37);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -4500,13 +4527,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 38 */
-/***/ (function(module, exports) {
-
-module.exports = React;
-
-/***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 module.exports = _;

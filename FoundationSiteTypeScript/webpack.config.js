@@ -17,13 +17,18 @@ const config = {
                 enforce:'pre',
                 test: /\.tsx?$/,
                 loader: "awesome-typescript-loader",
-                exclude: /(node_modules)/
+                exclude: /(node_modules)|(HackerNewsTut)/
             },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
                 enforce:"pre",
                 test: /\.js$/,
                 loader:"source-map-loader"
+            },
+            {
+                enforce: "pre",
+                test: /\.tsx?$/,
+                loader: "source-map-loader"
             }
         ]
     },

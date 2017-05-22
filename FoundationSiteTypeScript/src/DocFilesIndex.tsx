@@ -1,7 +1,8 @@
 import * as React from "React"
 import * as ReactDOM from "react-dom"
-import {IAllDocuments, IDocumentInfo, DocumentInfo, AllDocuments} from "./DocStorageInterfaces"
-import {FileDocumentContainer, FileDocuments } from  "./components/FileDocWrapper"
+import {IAllDocuments, IDocumentInfo, IDocumentItem, DocumentInfo, AllDocuments} from "./DocStorageInterfaces"
+import {FileDocumentContainer } from  "./components/FileDocWrapper"
+import {FileDocument} from  "./components/FileDocument"
 
 
 // create dumment Entries
@@ -16,9 +17,20 @@ var files:IDocumentInfo[] = [
 ];
 
 var collection:AllDocuments ={
-    CollectionName:"Myt list of Files",
+    CollectionName:"My list of Files",
     Files:files
 }
 
 
 ReactDOM.render(<FileDocumentContainer Files={collection.Files} CollectionName={collection.CollectionName} />, document.getElementById("docs"));
+//ReactDOM.render(<FileDocument Item={files[0]} />, document.getElementById("docs") );
+
+/* <FileDocument FileType={files[0].FileType}
+                             Id={files[0].Id} 
+                             Url={files[0].Url} 
+                             Description={files[0].Description} 
+                             FileName={files[0].FileName} 
+                             Title={files[0].Title} 
+                             UploadedBy={files[0].UploadedBy}
+                              UploadedDate={files[0].UploadedDate}
+                              */

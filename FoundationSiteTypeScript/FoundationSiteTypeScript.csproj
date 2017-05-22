@@ -58,6 +58,7 @@
     <TypeScriptCompile Include="HackerNewsTut\NewsInterfaces.ts" />
     <TypeScriptCompile Include="HackerNewsTut\NewsItemTest.tsx" />
     <TypeScriptCompile Include="src\components\container.tsx" />
+    <TypeScriptCompile Include="src\components\FileDocument.tsx" />
     <TypeScriptCompile Include="src\components\FileDocWrapper.tsx" />
     <TypeScriptCompile Include="src\components\Hello.tsx" />
     <TypeScriptCompile Include="src\components\itemThing.tsx" />
