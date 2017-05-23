@@ -12,6 +12,4 @@ export const FileDocumentContainer = (props: IAllDocuments) =>
             {_(props.Files).map(function (FileItm: IDocumentInfo, idx: number) {
                 return (<FileDocument key={FileItm.Id} Item={FileItm} />)
             }.bind(this)).value()}
-
     </div>
-    
