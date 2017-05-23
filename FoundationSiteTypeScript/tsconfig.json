@@ -52,6 +52,7 @@
   },
   "exclude":[
     "node_modules",
-    "HackerNewsTut"
+    "HackerNewsTut",
+    "dest"
   ]
 }

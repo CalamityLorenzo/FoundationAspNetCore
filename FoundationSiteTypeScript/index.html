@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Hello React!</title>
-        <script src="./node_modules/jquery/dist/jquery.js"></script>
-        <script src="./node_modules/lodash/lodash.min.js"></script>
-        <script src="./node_modules/moment/min/moment.min.js"></script>
-        
-    </head>
-    <body>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>File loader!</title>
+    <link rel="stylesheet" href="./dest/css/foundation.min.css"></link>
+    <link rel="stylesheet" href="./dest/css/app.css"></link>
+    <link rel="stylesheet" href="./dest/css/FileDocument.css"></link>
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/lodash/lodash.min.js"></script>
+    <script src="./node_modules/moment/min/moment.min.js"></script>
+
+</head>
+
+<body>
+    <div class="row">
         <!--<div id="example"></div>
         <div id="teggies"></div>-->
-        <div id="docs"></div>
-        <!-- Dependencies -->
-        <script src="./node_modules/react/dist/react.js"></script>
-        <script src="./node_modules/react-dom/dist/react-dom.js"></script>
+        <div id="docs" class="small-12 columns"></div>
+    </div>
+    <!-- Dependencies -->
+    <script src="./node_modules/react/dist/react.js"></script>
+    <script src="./node_modules/react-dom/dist/react-dom.js"></script>
+    <script src="./dest/js/foundation.min.js"></script>
 
-        <!-- Main -->
-        <script src="./dest/foundyApp.js"></script>
-        
-    </body>
+    <!-- Main -->
+    <script src="./dest/foundyApp.js"></script>
+
+</body>
+
 </html>

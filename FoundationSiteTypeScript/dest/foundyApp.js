@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1636,7 +1636,7 @@ var ReactCurrentOwner = __webpack_require__(5);
 var ReactComponentTreeHook = __webpack_require__(9);
 var ReactElement = __webpack_require__(3);
 
-var checkReactTypeSpec = __webpack_require__(34);
+var checkReactTypeSpec = __webpack_require__(35);
 
 var canDefineProperty = __webpack_require__(6);
 var getIteratorFn = __webpack_require__(16);
@@ -1973,23 +1973,9 @@ module.exports = React;
 
 /***/ }),
 /* 19 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-var _this = this;
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(18);
-var _ = __webpack_require__(40);
-var FileDocument_1 = __webpack_require__(23);
-exports.FileDocumentContainer = function (props) {
-    return React.createElement("div", null,
-        React.createElement("h1", null, props.CollectionName),
-        React.createElement("div", null, _(props.Files).map(function (FileItm, idx) {
-            return (React.createElement(FileDocument_1.FileDocument, { key: FileItm.Id, Item: FileItm }));
-        }.bind(_this)).value()));
-};
-
+module.exports = _;
 
 /***/ }),
 /* 20 */
@@ -1997,32 +1983,54 @@ exports.FileDocumentContainer = function (props) {
 
 "use strict";
 
-
-module.exports = __webpack_require__(26);
+var _this = this;
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(18);
+var _ = __webpack_require__(19);
+var FileDocument_1 = __webpack_require__(24);
+exports.FileDocumentContainer = function (props) {
+    return React.createElement("div", null,
+        React.createElement("div", { className: "row expanded" },
+            React.createElement("div", { className: "small-12 columns" },
+                React.createElement("h1", null, props.CollectionName))),
+        _(props.Files).map(function (FileItm, idx) {
+            return (React.createElement(FileDocument_1.FileDocument, { key: FileItm.Id, Item: FileItm }));
+        }.bind(_this)).value());
+};
 
 
 /***/ }),
 /* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(27);
+
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = ReactDOM;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(20);
-var ReactDOM = __webpack_require__(21);
-var FileDocWrapper_1 = __webpack_require__(19);
+var React = __webpack_require__(21);
+var ReactDOM = __webpack_require__(22);
+var FileDocWrapper_1 = __webpack_require__(20);
 // create dumment Entries
 var files = [
-    { Id: "1234", Url: "https://google.com",
+    { Id: "1234", Url: "https://google.com", Selected: false,
         FileName: "TheFileName.docx", Title: "Title one", Description: "Long winded words about things",
         FileType: "docx", UploadedBy: "Paul Lawrence", UploadedDate: 1495386000413 },
-    { Id: "12345", Url: "https://bing.com",
+    { Id: "12345", Url: "https://bing.com", Selected: false,
         FileName: "AfileNAme.docx", Title: "Title Twoses", Description: "Blah Blah ",
         FileType: "docx", UploadedBy: "Paul Lawrence", UploadedDate: 1495386000413 },
 ];
@@ -2044,7 +2052,7 @@ ReactDOM.render(React.createElement(FileDocWrapper_1.FileDocumentContainer, { Fi
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2061,24 +2069,46 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(18);
+var _ = __webpack_require__(19);
+var moment = __webpack_require__(41);
 var FileDocument = (function (_super) {
     __extends(FileDocument, _super);
     function FileDocument(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.onRowClick = function (domNode, evt) {
+            var element = domNode.currentTarget;
+            // yuck
+            var classList = element.classList;
+            var isSelected = _(classList).find(function (e) { return e === "selectedRow"; });
+            if (isSelected) {
+                element.classList.remove("selectedRow");
+            }
+            else {
+                element.classList.add("selectedRow");
+            }
+        };
+        return _this;
     }
+    FileDocument.prototype.fileSelected = function (item) {
+        return (item.Selected) ? "fileSelected" : "fileNotSelected";
+    };
+    FileDocument.prototype.formateDate = function (item) {
+        return moment(item.UploadedDate).format("YYYY-MM-DD");
+    };
     FileDocument.prototype.render = function () {
-        return React.createElement("div", null,
-            React.createElement("div", { className: "fileRow row" },
-                React.createElement("div", { className: "small-1 columns" },
-                    React.createElement("span", { className: this.props.Item.FileType })),
-                React.createElement("div", { className: "small-3 fileNameCell columns" },
-                    React.createElement("a", { href: this.props.Item.Url, className: "file" }, this.props.Item.FileName)),
-                React.createElement("div", { className: "small-4 columns" },
-                    React.createElement("span", null, this.props.Item.Description)),
-                React.createElement("div", { className: "small-2 columns" },
-                    React.createElement("span", null, this.props.Item.UploadedBy)),
-                React.createElement("div", { className: "small-2 columns" },
-                    React.createElement("span", null, this.props.Item.UploadedDate))));
+        return React.createElement("div", { className: "fileRow row", onClick: this.onRowClick.bind(this) },
+            React.createElement("div", { className: "small-1 columns" },
+                React.createElement("span", { className: this.fileSelected(this.props.Item) })),
+            React.createElement("div", { className: "small-1 columns" },
+                React.createElement("span", { className: this.props.Item.FileType })),
+            React.createElement("div", { className: "small-3 fileNameCell columns" },
+                React.createElement("a", { href: this.props.Item.Url, className: "file" }, this.props.Item.FileName)),
+            React.createElement("div", { className: "small-3 columns" },
+                React.createElement("span", null, this.props.Item.Description)),
+            React.createElement("div", { className: "small-2 columns" },
+                React.createElement("span", null, this.props.Item.UploadedBy)),
+            React.createElement("div", { className: "small-2 columns" },
+                React.createElement("span", null, this.formateDate(this.props.Item))));
     };
     return FileDocument;
 }(React.Component));
@@ -2086,7 +2116,7 @@ exports.FileDocument = FileDocument;
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2150,7 +2180,7 @@ var KeyEscapeUtils = {
 module.exports = KeyEscapeUtils;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2268,7 +2298,7 @@ module.exports = PooledClass;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2286,16 +2316,16 @@ module.exports = PooledClass;
 
 var _assign = __webpack_require__(7);
 
-var ReactChildren = __webpack_require__(27);
+var ReactChildren = __webpack_require__(28);
 var ReactComponent = __webpack_require__(8);
-var ReactPureComponent = __webpack_require__(32);
-var ReactClass = __webpack_require__(28);
-var ReactDOMFactories = __webpack_require__(29);
+var ReactPureComponent = __webpack_require__(33);
+var ReactClass = __webpack_require__(29);
+var ReactDOMFactories = __webpack_require__(30);
 var ReactElement = __webpack_require__(3);
-var ReactPropTypes = __webpack_require__(30);
-var ReactVersion = __webpack_require__(33);
+var ReactPropTypes = __webpack_require__(31);
+var ReactVersion = __webpack_require__(34);
 
-var onlyChild = __webpack_require__(35);
+var onlyChild = __webpack_require__(36);
 var warning = __webpack_require__(1);
 
 var createElement = ReactElement.createElement;
@@ -2378,7 +2408,7 @@ module.exports = React;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2394,11 +2424,11 @@ module.exports = React;
 
 
 
-var PooledClass = __webpack_require__(25);
+var PooledClass = __webpack_require__(26);
 var ReactElement = __webpack_require__(3);
 
 var emptyFunction = __webpack_require__(11);
-var traverseAllChildren = __webpack_require__(36);
+var traverseAllChildren = __webpack_require__(37);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
 var fourArgumentPooler = PooledClass.fourArgumentPooler;
@@ -2574,7 +2604,7 @@ var ReactChildren = {
 module.exports = ReactChildren;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3303,7 +3333,7 @@ module.exports = ReactClass;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3479,7 +3509,7 @@ module.exports = ReactDOMFactories;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3498,12 +3528,12 @@ module.exports = ReactDOMFactories;
 var _require = __webpack_require__(3),
     isValidElement = _require.isValidElement;
 
-var factory = __webpack_require__(38);
+var factory = __webpack_require__(39);
 
 module.exports = factory(isValidElement);
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3525,7 +3555,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3572,7 +3602,7 @@ ReactPureComponent.prototype.isPureReactComponent = true;
 module.exports = ReactPureComponent;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3591,7 +3621,7 @@ module.exports = ReactPureComponent;
 module.exports = '15.5.4';
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3610,7 +3640,7 @@ module.exports = '15.5.4';
 var _prodInvariant = __webpack_require__(4);
 
 var ReactPropTypeLocationNames = __webpack_require__(15);
-var ReactPropTypesSecret = __webpack_require__(31);
+var ReactPropTypesSecret = __webpack_require__(32);
 
 var invariant = __webpack_require__(2);
 var warning = __webpack_require__(1);
@@ -3684,7 +3714,7 @@ module.exports = checkReactTypeSpec;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3728,7 +3758,7 @@ module.exports = onlyChild;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3751,7 +3781,7 @@ var REACT_ELEMENT_TYPE = __webpack_require__(13);
 
 var getIteratorFn = __webpack_require__(16);
 var invariant = __webpack_require__(2);
-var KeyEscapeUtils = __webpack_require__(24);
+var KeyEscapeUtils = __webpack_require__(25);
 var warning = __webpack_require__(1);
 
 var SEPARATOR = '.';
@@ -3910,7 +3940,7 @@ module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3979,7 +4009,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3998,7 +4028,7 @@ module.exports = checkPropTypes;
 // Therefore we re-export development-only version with all the PropTypes checks here.
 // However if one is migrating to the `prop-types` npm library, they will go through the
 // `index.js` entry point, and it will branch depending on the environment.
-var factory = __webpack_require__(39);
+var factory = __webpack_require__(40);
 module.exports = function(isValidElement) {
   // It is still allowed in 15.5.
   var throwOnDirectAccess = false;
@@ -4007,7 +4037,7 @@ module.exports = function(isValidElement) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4027,7 +4057,7 @@ var invariant = __webpack_require__(2);
 var warning = __webpack_require__(1);
 
 var ReactPropTypesSecret = __webpack_require__(17);
-var checkPropTypes = __webpack_require__(37);
+var checkPropTypes = __webpack_require__(38);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -4527,10 +4557,10 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports) {
 
-module.exports = _;
+module.exports = moment;
 
 /***/ })
 /******/ ]);

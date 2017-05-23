@@ -8,6 +8,7 @@ export interface IDocumentInfo{
     FileType:string;
     UploadedBy:string;
     UploadedDate:number;
+    Selected:boolean;
 }
 
 export interface  IDocumentItem{
@@ -23,6 +24,7 @@ export class DocumentInfo implements IDocumentInfo{
     Id:string;
     Url:string;
     Title:string;
+    Selected:boolean;
     FileName:string;
     Description:string;
     FileType:string;

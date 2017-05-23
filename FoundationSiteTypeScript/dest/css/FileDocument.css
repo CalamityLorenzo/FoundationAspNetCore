@@ -1,0 +1,7 @@
+.fileRow:hover{
+    background-color: rgba(0,100,200,0.2);
+}
+
+.fileRow.selectedRow{
+    background-color: rgba(0,100,200,0.5);
+}

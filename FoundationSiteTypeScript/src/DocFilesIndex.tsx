@@ -8,10 +8,10 @@ import {FileDocument} from  "./components/FileDocument"
 // create dumment Entries
 
 var files:IDocumentInfo[] = [
-    { Id:"1234", Url:"https://google.com", 
+    { Id:"1234", Url:"https://google.com", Selected:false,
     FileName:"TheFileName.docx", Title:"Title one", Description:"Long winded words about things",
      FileType:"docx", UploadedBy:"Paul Lawrence", UploadedDate:1495386000413},
-         { Id:"12345", Url:"https://bing.com", 
+         { Id:"12345", Url:"https://bing.com", Selected:false,
     FileName:"AfileNAme.docx", Title:"Title Twoses", Description:"Blah Blah ",
      FileType:"docx", UploadedBy:"Paul Lawrence", UploadedDate:1495386000413},
 ];
